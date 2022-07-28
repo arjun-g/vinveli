@@ -1,0 +1,144 @@
+.ticket{
+    width: 100vw;
+    background-color: transparent;
+    display: flex;
+    height: calc(100vh - 150px);
+    top: 150px;
+}
+
+.content{
+    background-color: var(--bg-color-1);
+    height: 100%;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.ticket :global(.adm-list-body){
+    padding: 0 24px;
+}
+
+.profile :global(.txt-subtitle){
+    color: var(--txt-color-1);
+    padding: 16px;
+    display: flex;
+}
+
+.profile :global(.adm-form-item-child-inner){
+    color: var(--txt-color-1);
+}
+
+.walletcontainer{
+    padding: 0 16px;
+}
+
+.wallet{
+    display: flex;
+    background-color: var(--bg-color-inverse);
+    color: var(--txt-color-inverse);
+    border-radius: 16px;
+    position: relative;
+    padding-bottom: 24px;
+}
+
+.wallet .left{
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+    flex: 0 0 60%;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.wallet .left span{
+    font-weight: 600;
+}
+
+.wallet .left :global(.txt-subtitle){
+    font-weight: 800;
+}
+
+.wallet .right{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 24px 0;
+    gap: 16px;
+    flex: 0 0 40%;
+}
+
+.wallet .code{
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+}
+
+.background{
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("../../images/rocket_horizontal_black.png");
+    background-size: 90% auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.15;
+}
+
+.title{
+    padding: 16px;
+    display: flex;
+}
+
+.funds{
+    padding: 16px;
+    text-align: right;
+}
+
+.funds > div:first-child{
+    padding-bottom: 16px;
+    display: flex;
+    white-space: nowrap;
+}
+
+.moneys{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.action{
+    width: 100%;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.message{
+    flex: 1 1 100%;
+}
+
+.buy{
+    height: 100%;
+}
+
+.buy > div:nth-child(4){
+    flex: 1 1 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.message{
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.ticketmask{
+    display: none;
+}

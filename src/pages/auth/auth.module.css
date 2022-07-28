@@ -1,0 +1,154 @@
+.auth{
+    background-image: url("../../images/bg-image.png");
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.title{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    z-index: 200;
+    height: 200px;
+}
+
+.title .logo{
+    width: 100%;
+    padding: 48px;
+    padding-top: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: absolute;
+    flex-direction: column;
+}
+
+.title.small{
+    height: 60px;
+}
+
+.title .logo img{
+    height: 60px;
+    transition: all 0.3s ease;
+}
+
+.title.small .logo{
+    padding: 12px;
+    transition: all 0.3s ease;
+}
+
+.title.small .logo img{
+    height: 30px;
+    transition: all 0.3s ease;
+}
+
+.title .back{
+    background: transparent;
+    border: 0;
+    width: 60px;
+    height: 60px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.title.small .back{
+    opacity: 1;
+    pointer-events: all;
+    transition: all 0.3s ease;
+}
+
+.title.small .tagline{
+    display: none;
+}
+
+.overlay{
+    position: absolute;
+    background-color: var(--bg-color-1);
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.overlay.show{
+    opacity: 0.9;
+    transition: all 0.3s ease;
+}
+
+.tagline{
+    margin-top: 12px;
+}
+
+.options{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    padding: 32px;
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+.options button{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.options.hide{
+    transform: translateY(100%);
+    transition: all 0.3s ease;
+}
+
+.signup{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    z-index: 100;
+    transition: all 0.3s ease;
+    padding: 24px;
+}
+
+.signup.hide{
+    transform: translateY(100%);
+    transition: all 0.3s ease;
+}
+
+.signupform{
+    background-color: transparent;
+}
+
+.signupform :global(.adm-list-body), .signupform :global(.adm-list-item){
+    background-color: transparent;
+    border: 0 !important;
+}
+
+.signupform :global(.adm-form-item-label){
+    color: var(--txt-color-2);
+}
+
+.signupform :global(.adm-list-item){
+    padding-left: 0;
+    border: 0;
+}
+
+.signupform :global(.adm-input-element){
+    color: var(--txt-color-1);
+}
+
+.signupform :global(.adm-list-item-content){
+    border-top: 0;
+    border-bottom: 2px solid var(--border-color);
+}
+
+@media only screen and (max-height:460px){
+    .title{
+        display: none;
+    }
+    .signup h1{
+        display: none;
+    }
+}

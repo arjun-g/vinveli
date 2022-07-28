@@ -1,0 +1,72 @@
+.home{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.content{
+    flex: 0 0 calc(100vh - 116px);
+    padding: 12px 24px;
+    overflow-y: auto;
+}
+
+.bottom{
+    background-color: var(--bg-color-2);
+    padding: 4px;
+}
+
+.bottom :global(.adm-tab-bar-item){
+    color: var(--txt-color-2);
+}
+
+.bottom :global(.adm-tab-bar-item) .tabicon{
+    color: var(--txt-color-2);
+}
+
+.bottom :global(.adm-tab-bar-item.adm-tab-bar-item-active){
+    color: var(--txt-color-1);
+}
+
+.bottom :global(.adm-tab-bar-item.adm-tab-bar-item-active) .tabicon{
+    color: var(--txt-color-1);
+}
+
+.mission{
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--txt-color-1);
+    background-color: black;
+    display: flex;
+    padding: 12px;
+    border-radius: 8px;
+    padding-right: 100px;
+    position: relative;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: 500px 500px;
+    background-position: 100px 30px;
+}
+
+.mission :global(.txt-title){
+    display: flex;
+    width: 8ch;
+}
+
+.planetbackground{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: translateX(30%);
+    z-index: 0;
+}
+
+.mission .details{
+    z-index: 1;
+}
+
+.mission .rightarrow{
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    font-size: 32px;
+}

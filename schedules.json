@@ -1,0 +1,205 @@
+[
+    {
+        "between": ["LDN", "NYC"],
+        "cost": 100000,
+        "duration": {
+            "hour": 1
+        },
+        "schedules": {
+            "LDN": [1, 15],
+            "NYC": [2, 16]
+        }
+    },
+    {
+        "between": ["LDN", "BJG"],
+        "cost": 100000,
+        "duration": {
+            "hour": 1
+        },
+        "schedules": {
+            "LDN": [3, 17],
+            "BJG": [4, 18]
+        }
+    },
+    {
+        "between": ["LDN", "CHN"],
+        "cost": 100000,
+        "duration": {
+            "hour": 1
+        },
+        "schedules": {
+            "LDN": [5, 19],
+            "CHN": [6, 20]
+        }
+    },
+    {
+        "between": ["LDN", "MBS"],
+        "cost": 100000000,
+        "duration": {
+            "months": 7
+        },
+        "schedules": {
+            "LDN": [7],
+            "MBS": [8]
+        }
+    },
+    {
+        "between": ["LDN", "MOB"],
+        "cost": 1000000,
+        "duration": {
+            "days": 3
+        },
+        "schedules": {
+            "LDN": [9],
+            "MOB": [10]
+        }
+    },
+    {
+        "between": ["LDN", "ISS"],
+        "cost": 300000,
+        "duration": {
+            "hours": 6
+        },
+        "schedules": {
+            "LDN": [11],
+            "ISS": [12]
+        }
+    },
+
+    {
+        "between": ["NYC", "BJG"],
+        "cost": 100000,
+        "duration": {
+            "hour": 1
+        },
+        "schedules": {
+            "NYC": [3, 17],
+            "BJG": [4, 18]
+        }
+    },
+    {
+        "between": ["NYC", "CHN"],
+        "cost": 100000,
+        "duration": {
+            "hour": 1
+        },
+        "schedules": {
+            "NYC": [5, 19],
+            "CHN": [6, 20]
+        }
+    },
+    {
+        "between": ["NYC", "MBS"],
+        "cost": 100000000,
+        "duration": {
+            "months": 7
+        },
+        "schedules": {
+            "NYC": [7],
+            "MBS": [8]
+        }
+    },
+    {
+        "between": ["NYC", "MOB"],
+        "cost": 1000000,
+        "duration": {
+            "days": 3
+        },
+        "schedules": {
+            "NYC": [9],
+            "MOB": [10]
+        }
+    },
+    {
+        "between": ["NYC", "ISS"],
+        "cost": 300000,
+        "duration": {
+            "hours": 6
+        },
+        "schedules": {
+            "NYC": [11],
+            "ISS": [12]
+        }
+    },
+
+
+    {
+        "between": ["BJG", "CHN"],
+        "cost": 100000,
+        "duration": {
+            "hour": 1
+        },
+        "schedules": {
+            "BJG": [5, 19],
+            "CHN": [6, 20]
+        }
+    },
+    {
+        "between": ["BJG", "MBS"],
+        "cost": 100000000,
+        "duration": {
+            "months": 7
+        },
+        "schedules": {
+            "BJG": [7],
+            "MBS": [8]
+        }
+    },
+    {
+        "between": ["BJG", "MOB"],
+        "cost": 1000000,
+        "duration": {
+            "days": 3
+        },
+        "schedules": {
+            "BJG": [9],
+            "MOB": [10]
+        }
+    },
+    {
+        "between": ["BJG", "ISS"],
+        "cost": 300000,
+        "duration": {
+            "hours": 6
+        },
+        "schedules": {
+            "BJG": [11],
+            "ISS": [12]
+        }
+    },
+
+
+    {
+        "between": ["CHN", "MBS"],
+        "cost": 100000000,
+        "duration": {
+            "months": 7
+        },
+        "schedules": {
+            "CHN": [7],
+            "MBS": [8]
+        }
+    },
+    {
+        "between": ["BJG", "MOB"],
+        "cost": 1000000,
+        "duration": {
+            "days": 3
+        },
+        "schedules": {
+            "CHN": [9],
+            "MOB": [10]
+        }
+    },
+    {
+        "between": ["BJG", "ISS"],
+        "cost": 300000,
+        "duration": {
+            "hours": 6
+        },
+        "schedules": {
+            "CHN": [11],
+            "ISS": [12]
+        }
+    }
+]

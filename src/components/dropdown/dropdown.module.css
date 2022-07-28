@@ -1,0 +1,18 @@
+.dropdown{
+
+}
+
+.dropdownpopupbody{
+    max-height: 45vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.search{
+    padding: 12px;
+}
+
+.list{
+    flex:  1 1 100%;
+    overflow-y: auto;
+}
