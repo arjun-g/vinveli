@@ -114,8 +114,8 @@ router.get("/wallet/beneficiary", async (req, res) => {
   })
 })
 
-router.put("/wallet/refund", async (req, res) => {
-  const { amount } = req.body;
+async function createPayout(req, amount){
+  return new Promise(async (resolve, reject) => {
   const db = await req.db();
   const usercollection = db.collection("users");
   const user = await usercollection.findOne({
@@ -151,7 +151,6 @@ router.put("/wallet/refund", async (req, res) => {
       }
     })
     .then(resp => {
-      console.log("URL", `/v1/payouts/complete/${resp.data.data.id}/${amount}`)
       fetch(`/v1/payouts/confirm/${resp.data.data.id}`, {
         method: "POST",
         body: {}
@@ -160,19 +159,23 @@ router.put("/wallet/refund", async (req, res) => {
         fetch(`/v1/payouts/complete/${resp.data.data.id}/${amount}`, {
           method: "POST"
         })
-        .then(res => console.log(res.data.data))
+        .then(res => console.log(resp.data.data))
+      })
+      .catch(err => {
+        fetch(`/v1/payouts/complete/${resp.data.data.id}/${amount}`, {
+          method: "POST"
+        })
+        .then(res => console.log(resp.data.data))
       });
-      res.json(resp.data.data);
+      resolve(resp.data.data);
     });
   })
+  })
+}
 
-  
-  // fetch("/v1/payouts", {
-  //   method: "POST",
-  //   body: {
-
-  //   }
-  // })
+router.put("/wallet/refund", async (req, res) => {
+  const resp = await createPayout(req, req.body.amount);
+  res.json(resp);
 });
 
 router.get("/wallet/payouts", (req, res) => {

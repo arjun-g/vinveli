@@ -6,17 +6,34 @@
 }
 
 .ticket{
-    background-color: var(--bg-color-2);
+    background-color: var(--bg-color-3);
     width: 100%;
     padding: 12px;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     gap: 16px;
+    position: relative;
 }
 
 .action{
     display: flex;
     gap: 8px;
     white-space: nowrap;
+    align-items: center;
+}
+
+.action > div:first-child{
+    flex: 1 1 100%;
+}
+
+.pending:before{
+    content: "";
+    display: flex;
+    height: 4px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--secondary-color);
 }

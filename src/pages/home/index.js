@@ -1,6 +1,6 @@
 import { Popup, Space, TabBar, Swiper } from "antd-mobile";
 import { useEffect, useRef, useState } from "react";
-import { Link, useParams, useMatch } from "react-router-dom";
+import { Link, useParams, useMatch, useNavigate } from "react-router-dom";
 import { Page } from "../";
 import { Icon } from "../../components/icons";
 import { PlanetBackground } from "../../components/planet";
@@ -29,16 +29,26 @@ export function Home(){
     const missions = useStore(state => state.missions);
     const swipperRef = useRef(null);
     const missionRouteMatch = useMatch("/mission/:missionId/*");
-    const bookingsRouteMatch = useMatch("/bookings");
+    const bookingsRouteMatch = useMatch("/bookings/*");
+    const navigate = useNavigate();
 
     useEffect(() => {
         useStore.getState().getMissions();
     }, [true]);
 
+    useEffect(() => {
+        if(bookingsRouteMatch){
+            swipperRef.current.swipeTo(1);
+        }
+        else{
+            swipperRef.current.swipeTo(0);
+        }
+    }, [bookingsRouteMatch]);
+
     return <Page showBack={false}>
         <div className={style.home}>
             <div className={style.content}>
-                <Swiper defaultIndex={bookingsRouteMatch ? 1 : 0} ref={swipperRef}>
+                <Swiper defaultIndex={bookingsRouteMatch ? 1 : 0} ref={swipperRef} indicator={() => {}}>
                     <Swiper.Item>
                         <Space direction="vertical">
                             <span className="txt-small">Welcome</span>
@@ -64,10 +74,10 @@ export function Home(){
             </div>
             <TabBar className={style.bottom} defaultActiveKey={bookingsRouteMatch ? "bookings" : "home"} onChange={(key) => {
                 if(key === "home"){
-                    swipperRef.current.swipeTo(0);
+                    navigate("/")
                 }
                 else if(key === "bookings"){
-                    swipperRef.current.swipeTo(1);
+                    navigate("/bookings");
                 }
             }}>
                 <TabBar.Item key="home" icon={<Icon icon={"home"} className={style.tabicon} />} title="Home" />

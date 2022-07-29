@@ -133,3 +133,9 @@
 p{
   line-height: 1.75;
 }
+
+.adm-button-warning{
+  background-color: var(--secondary-color) !important;
+  border-color: var(--secondary-color) !important;
+  color: white !important;
+}

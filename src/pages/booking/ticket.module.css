@@ -1,0 +1,73 @@
+.container{
+    width: 100vw;
+}
+.page{
+
+}
+
+.content{
+    flex: 1 1 100%;
+    padding: 16px;
+    overflow-y: auto;
+}
+
+.action{
+    padding: 16px;
+}
+
+.countdown{
+    text-align: center;
+    padding: 48px;
+}
+
+.ticket{
+    background-color: var(--bg-color-3);
+    padding: 16px;
+    display: flex;
+    position: relative;
+    border-radius: 12px;
+    padding-bottom: 32px;
+}
+
+.ticket > div:nth-child(2){
+    flex: 1 1 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ticket > div:nth-child(3){
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.ticket > div:nth-child(3) img{
+    height: 16px;
+}
+
+.ticket .background{
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("../../images/rocket_horizontal_white.png");
+    background-size: 75% auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.15;
+    top: 0;
+    left: 0;
+}
+
+.ticketid{
+    position: absolute;
+    right: 16px;
+    bottom: 8px;
+}
+
+.action{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: var(--bg-color-2);
+}

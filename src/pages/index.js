@@ -8,12 +8,13 @@ import style from "./page.module.css";
 
 export function Page({
     children,
-    showBack = true
+    showBack = true,
+    onBack
 }){
     const navigate = useNavigate();
     return <div className={style.page}>
         <NavBar className={style.navbar} backArrow={showBack} onBack={() => {
-            navigate(-1);
+            onBack ? onBack() : navigate(-1);
         }}>
             <img src={logoWhite} className={style.logo} />
         </NavBar>

@@ -193,11 +193,30 @@ const useStore = create((set, get) => {
         },
 
         getTickets: async () => {
-            const { tickets } = await fetch("/api/ticket").then(resp => resp.json());
+            const { tickets } = await fetch(
+                `/api/ticket`
+            ).then(resp => resp.json());
             set(produce(state => {
-                state.tickets = tickets;
+                state.tickets = tickets.reverse();
             }));
             return tickets;
+        },
+
+        cancelTicket: async (ticketId) => {
+            await fetch(
+                `/api/ticket/${ticketId}`,
+                {
+                    method: "DELETE"
+                }
+            ).then(resp => resp.json());
+            get().getTickets();
+        },
+
+        getBeneficiaryUrl: async (redirectTo) => {
+            const { uri } = await fetch(
+                `/api//wallet/beneficiary?complete_url=${encodeURIComponent(redirectTo)}&cancel_url=${encodeURIComponent(redirectTo)}`
+            ).then(resp => resp.json());
+            return uri;
         },
 
         signup: async ({
