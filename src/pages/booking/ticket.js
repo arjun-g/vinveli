@@ -1,4 +1,4 @@
-import { useParams, useMatch } from "react-router-dom";
+import { useParams, useMatch, useNavigate } from "react-router-dom";
 import { NavBar, Popup, Button, Space, Dialog } from "antd-mobile";
 
 import style from "./ticket.module.css";
@@ -11,6 +11,7 @@ import { useEffect } from "react";
 export function Ticket({
     show
 }){
+    const navigate = useNavigate();
     const ticketRouteMatch = useMatch("/bookings/:ticketId");
     const ticket = useStore(state => state.tickets.find(ticket => ticket._id === ticketRouteMatch?.params?.ticketId))
     useEffect(() => {
@@ -18,7 +19,9 @@ export function Ticket({
         useStore.getState().getTickets();
     }, []);
     return <Popup visible={show} position="right" bodyClassName={style.container}>
-        {ticket && <Page>
+        {ticket && <Page onBack={() => {
+            navigate("/bookings");
+        }}>
             <div className={style.content}>
                 <Space direction="vertical" block>
                     <div className={style.countdown}>
@@ -42,10 +45,20 @@ export function Ticket({
                             </div>
                         })}
                     </Space>
+                    <span style={{ height: "50px" }} />
+                    <span className="txt-title" style={{ fontWeight: 400 }}>PAID: <strong>${Intl.NumberFormat().format(ticket.amount)}</strong></span>
+                    {ticket.deposit && <span className="txt-title" style={{ fontWeight: 400 }}>PENDING: <strong>${Intl.NumberFormat().format((ticket.mission.cost * ticket.seats.length) - ticket.amount)}</strong></span>}
                 </Space>
             </div>
             <div className={style.action}>
-                {ticket.deposit && <Button block color="primary">Make Full Payment</Button>}
+                {ticket.deposit && <Button block color="primary" onClick={async () => {
+                    await useStore.getState().updateTicket(ticket._id);
+                    useStore.getState().getTickets();
+                    Dialog.alert({
+                        confirmText: "OK",
+                        content: "Payment Successfull"
+                    })
+                }}>Make Full Payment</Button>}
                 <Button block color="warning" onClick={() => {
                     if(!useStore.getState().currentUser.beneficiary){
                         Dialog.confirm({
@@ -53,7 +66,7 @@ export function Ticket({
                             cancelText: "Cancel",
                             confirmText: "Add Beneficiary",
                             onConfirm: async () => {
-                                const uri = await useStore.getState().getBeneficiaryUrl(`https://vinveli.loca.lt/bookings/${ticket._id}`);
+                                const uri = await useStore.getState().getBeneficiaryUrl(window.location.href);
                                 window.location.href = uri;
                             }
                         });
@@ -65,6 +78,8 @@ export function Ticket({
                             confirmText: "Yes",
                             onConfirm: async () => {
                                 await useStore.getState().cancelTicket(ticket._id);
+                                useStore.getState().getTickets();
+                                navigate("/bookings");
                             }
                         })
                     }

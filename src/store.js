@@ -93,7 +93,7 @@ const useStore = create((set, get) => {
             const wallet = await fetch("/api/wallet").then(resp => resp.json());
             set(produce(state => {
                 state.wallet = wallet;
-                state.user.wallet = wallet.id;
+                get().getUser();
             }))
             return wallet;
         },
@@ -185,6 +185,17 @@ const useStore = create((set, get) => {
                     deposit,
                     seats
                 }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(resp => resp.json());
+            return ticket;
+        },
+
+        updateTicket: async ticketId => {
+            const ticket = await fetch(`/api/ticket/${ticketId}`, {
+                method: "PUT",
+                body: JSON.stringify({}),
                 headers: {
                     "Content-Type": "application/json"
                 }

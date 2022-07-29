@@ -17,6 +17,7 @@ import style from "./ticket.module.css";
 import { SeatSelection } from "./seatselection";
 import QRCode from "react-qr-code";
 import { AddFunds } from "./addfunds";
+import { Icon } from "../../components/icons";
 
 export function Ticket({ show, mission }) {
   console.log("RE RENDERING");
@@ -27,6 +28,7 @@ export function Ticket({ show, mission }) {
   const wallet = useStore((state) => state.wallet);
   const [selectedSeats, setSelectedSeats] = useState(null);
   const [showAddFunds, setShowAddFunds] = useState(false);
+  const [bookingSuccess, setBookingSuccess] = useState(false);
   console.log("IG", geo, identities);
   useEffect(() => {
     if (show) {
@@ -35,7 +37,6 @@ export function Ticket({ show, mission }) {
         .getUser()
         .then((user) => {});
       useStore.getState().getOfficialIdentities();
-      useStore.getState().getWallet();
       if (geo.countries.length === 0) {
         useStore
           .getState()
@@ -49,6 +50,10 @@ export function Ticket({ show, mission }) {
       }
     }
   }, [show]);
+  useEffect(() => {
+    if(user?.firstName)
+      useStore.getState().getWallet();
+  }, [user?.firstName])
   return (
     <Popup
       visible={show}
@@ -57,7 +62,19 @@ export function Ticket({ show, mission }) {
       maskClassName={style.ticketmask}
     >
       <div className={style.content}>
-        {/* {user?.wallet && selectedSeats && } */}
+        {<Popup visible={bookingSuccess} bodyStyle={{ height: "100vh" }}>
+          <div style={{ height: "100%", textAlign: "center", display: "flex", flexDirection: "column", gap: "24px", alignItems: "center", justifyContent: "center" }}>
+            <span className="txt-title" style={{ fontWeight: 400 }}>SUCCESS</span>
+            <span className="txt-title" style={{ fontWeight: 400 }}><Icon style={{ fontSize: "64px" }} icon={"task_alt"} filled={false} /></span>
+            <span className="txt-medium">TICKET BOOKED SUCCESSFULLY</span>
+            <div style={{ height: "0" }} />
+            <div>
+              <Button color="primary" onClick={() => {
+                navigate("/bookings");
+              }}>View Ticket</Button>
+            </div>
+          </div>
+        </Popup>}
         {
           <Popup visible={user?.wallet && selectedSeats} position={"right"}
           bodyClassName={style.ticket}
@@ -139,7 +156,7 @@ export function Ticket({ show, mission }) {
                         }
                       }else{
                         useStore.getState().getTickets();
-                        navigate("/bookings");
+                        setBookingSuccess(true);
                       }
                     });
                 }}>
@@ -161,7 +178,7 @@ export function Ticket({ show, mission }) {
                         }
                       }else{
                         useStore.getState().getTickets();
-                        navigate("/bookings");
+                        setBookingSuccess(true);
                       }
                     });
                 }}>
@@ -214,8 +231,8 @@ export function Ticket({ show, mission }) {
                       number: e.identification_number,
                     },
                   })
-                  .then(() => {
-                    useStore.getState().createWallet({});
+                  .then(async () => {
+                    await useStore.getState().createWallet({});
                   });
               }}
               footer={

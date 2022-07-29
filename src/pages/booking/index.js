@@ -23,7 +23,7 @@ export function Booking(){
                     <span>SEATS: {ticket.seats.map(s => `A${s}`).join(", ")}</span>
                     <div className={style.action}>
                         <div>
-                            {ticket.deposit && <span style={{ color: "var(--secondary-color)" }}>* Payment Pending</span>}
+                            {!ticket.cancelled && ticket.deposit && <span style={{ color: "var(--secondary-color)" }}>* Payment Pending</span>}
                         </div>
                         <div>
                             {!ticket.cancelled && <Button size="mini" color="primary" onClick={() => {

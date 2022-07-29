@@ -114,6 +114,52 @@ router.post("/ticket", async (req, res) => {
     })
 });
 
+router.put("/ticket/:ticketId", async (req, res) => {
+  const { ticketId } = req.params;
+  const db = await req.db();
+  const usercollection = db.collection("users");
+  const ticketcollection = db.collection("tickets");
+  const user = await usercollection.findOne({
+      _id: new ObjectID(req.user.id)
+  });
+  const ticket = await ticketcollection.findOne({
+    _id: new ObjectID(ticketId)
+  });
+  console.log("GOT TICKET", ticket);
+  const amount = (ticket.mission.cost * ticket.seats.length) - ticket.amount;
+  await fetch("/v1/account/transfer", {
+      method: "POST",
+      body: {
+          amount,
+          currency: "USD",
+          destination_ewallet: process.env.VINVELI_WALLET,
+          source_ewallet: user.wallet
+      }
+  }).then(async resp => {
+      await fetch(`/v1/account/transfer/response`, {
+          method: "POST",
+          body: {
+              id: resp.data.data.id,
+              status: "accept"
+          }
+      });
+      await ticketcollection.findOneAndUpdate({
+        _id: new ObjectID(ticketId)
+      }, {
+        $set: {
+          amount: (ticket.mission.cost * ticket.seats.length),
+          deposit: false
+        }
+      })
+      res.json(ticket);
+  })
+  .catch(err => {
+    console.log("ERRR", err);
+      res.status(400).json(err.response.data.status);
+  })
+});
+
+
 router.get("/ticket", async (req, res) => {
     const db = await req.db();
     const ticketcollection = db.collection("tickets");
