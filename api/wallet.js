@@ -11,6 +11,7 @@ router.post("/wallet", async (req, res) => {
     _id: new ObjectID(req.user.id),
   });
   const { metadata } = req.body;
+  console.log("STEP 1", user);
   const walletResp = await fetch("/v1/user", {
     method: "POST",
     body: {
@@ -47,7 +48,9 @@ router.post("/wallet", async (req, res) => {
         metadata,
       },
     },
-  });
+  }).catch(err => console.log("ERR", err));
+
+  console.log("GOT WLL", walletResp.data);
   // console.log("WALLETREP", walletResp.data);
   const walletId = walletResp.data.data.id;
   await usercollection.findOneAndUpdate(

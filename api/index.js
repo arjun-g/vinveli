@@ -28,8 +28,14 @@ app.use((req, res, next) => {
     if(req.cookies["vinveli.auth"]){
         const parsedjwt = jwt.verify(req.cookies["vinveli.auth"], process.env.SECRET_KEY);
         req.user = parsedjwt;
+        next();
+    }else{
+        if(req.path !== "/api/user/register" && req.path !== "/api/user/login" && req.path !== "/api/hooks"){
+            res.status(401).json({ error: true });
+        }else{
+            next();
+        }
     }
-    next();
 });
 
 app.use((req, res, next) => {
