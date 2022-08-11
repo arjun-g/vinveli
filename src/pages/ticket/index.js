@@ -203,7 +203,7 @@ export function Ticket({ show, mission }) {
             }}
           />
         )}
-        {!user?.wallet && (
+        {!user?.wallet && selectedSeats && (
           <div className={style.profile}>
             <span className={`txt-subtitle`}>
               Complete your Profile to proceed
