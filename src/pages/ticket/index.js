@@ -206,7 +206,7 @@ export function Ticket({ show, mission }) {
         {!user?.wallet && selectedSeats && (
           <div className={style.profile}>
             <span className={`txt-subtitle`}>
-              Complete your Profile to proceed
+              Complete your Profile to proceed.
             </span>
             <Form
               onFinish={(e) => {
